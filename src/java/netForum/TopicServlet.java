@@ -6,13 +6,8 @@
 package netForum;
 
 import forummain.Forum;
-import forummain.Post;
 import forummain.Topic;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,45 +32,14 @@ public class TopicServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
                 forum=Forum.getInstance();
                 topic = getTopicById(id);
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<link rel='stylesheet' type='text/css' href='../style.css' />");
-            out.println("<title>" + topic.getSubject() + " topik</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1 align='center'>" + topic.getSubject() + " topik</h1>");  
-            out.println("<table>");
-            out.println("<tr>");
-            out.println("<th>Sorszám</th>");
-            out.println("<th>Szerző</th>");		
-            out.println("<th>Hozzászólás</th>");
-            out.println("<th>Dátum</th>");
-            out.println("</tr>");
-            for(int i=topic.getPosts().size()-1; i>=0; i--) {
-                out.println("<tr>");
-                out.println("<td>" + i + ".</td>");
-                out.println("<td>" + topic.getPosts().get(i).getAuthor() + "</td>");
-                out.println("<td>" + topic.getPosts().get(i).getMessage() + "</td>");
-                out.println("<td>" + topic.getPosts().get(i).getTime() + "</td>");
-                out.println("</tr>");
-            }
-            out.println("</table><p>");
-            out.println("<form method='post' action='" + id + "'>");
-            out.print("Szerző: <input type='text' name='Author'>&nbsp&nbsp");
-            out.print("Hozzászólás: <input id='message' type='text' name='Message'><br>");
-            out.print("<p><input style='float:left;' type='submit' value='Elküld'>");
-            out.print("</form>");
-            
-            out.println("<a class=btn style='float:right;' href='../ForumServlet'><button type='button'>Vissza a topikokhoz</button></a>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+        request.setAttribute("forum", forum);
+        request.setAttribute("topic", topic);
+        request.setAttribute("id", id);
+        request.getRequestDispatcher("/WEB-INF/jsp/TopicJSP.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
