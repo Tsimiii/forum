@@ -4,6 +4,8 @@
     Author     : TIMI
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="forummain.Topic"%>
 <%@page import="forummain.Forum"%>
 
@@ -26,7 +28,7 @@
             <tr>
             <th>Tárgy</th>
             <th>Szerző</th>		
-            <th>Válaszok száma</th>
+            <th>Posztok száma</th>
             <th>Utolsó hozzászólás dátuma</th>
             </tr>
             <% for(Topic t : f.getTopics()) { %>
@@ -34,7 +36,10 @@
                 <td><a href='./TopicServlet/<%= t.getId() %>'> <%= t.getSubject()%> </a></td>
                 <td> <%= t.getAuthor() %> </td>
                 <td> <%= t.getReplies() %> </td>
-                <td> <%= t.getLastPost() %> </td>
+                <% Date date=new Date(t.getLastPost());
+                SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                String dateText = df2.format(date); %>
+                <td> <%= dateText %> </td>
                 </tr> 
             <% } %>
             </table>

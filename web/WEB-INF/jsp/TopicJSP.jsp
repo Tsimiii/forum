@@ -4,6 +4,8 @@
     Author     : TIMI
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="forummain.Topic"%>
 <%@page import="forummain.Forum"%>
 
@@ -32,7 +34,10 @@
             <td><%= i %>.</td>
             <td><%= topic.getPosts().get(i).getAuthor() %></td>
             <td><%= topic.getPosts().get(i).getMessage() %></td>
-            <td><%= topic.getPosts().get(i).getTime() %></td>
+            <% Date date=new Date(topic.getPosts().get(i).getTime());
+            SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+            String dateText = df2.format(date); %>
+            <td><%= dateText %></td>
             </tr>
         <% } %>
         </table><p>

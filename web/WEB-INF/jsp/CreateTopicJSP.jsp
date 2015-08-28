@@ -19,8 +19,6 @@
         <td valign='top'><input type='text' name='subject' size='20'></td></tr>
         <tr><td valign='top'>A topik szerzője: </td>
         <td valign='top'><input type='text' name='author' size='20'></td></tr>
-        <tr><td valign='top'>A topik első üzenete: </td>
-        <td valign='top'><input type='text' name='message' size='20'></td></tr>
         <tr><td valign='top'><input type='submit' value='Topik létrehozása'></td></tr>
         </table></form>
     </body>

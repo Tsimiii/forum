@@ -6,8 +6,14 @@
 package netForum;
 
 import forummain.Forum;
+import forummain.Post;
 import forummain.Topic;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +24,10 @@ import javax.servlet.http.HttpServletResponse;
 public class TopicServlet extends HttpServlet {
     
     private Forum forum;
-    private int id;
+    public int id;
     private Topic topic = null;
+    public Connection conn = null;
+    public Statement stmt = null;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,7 +82,39 @@ public class TopicServlet extends HttpServlet {
         if(request.getParameterMap().containsKey("Author") && request.getParameterMap().containsKey("Message")) {
             String author = request.getParameter("Author");
             String message = request.getParameter("Message");
-            topic.writePost(author, message);
+            Post post = topic.writePost(author, message);
+            
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost/forumdb", "root", "");
+                stmt = conn.createStatement();
+                
+                PreparedStatement pstmt = conn.prepareStatement("insert into posts (author, topic_id, message, curr_time) values(?,?,?,?)");
+                pstmt.setString(1, author);
+                pstmt.setInt(2, id);
+                pstmt.setString(3, message);
+                pstmt.setLong(4, post.getTime());
+                pstmt.executeUpdate();
+                //conn.commit();
+            }catch(ClassNotFoundException ex) {
+                System.out.println("Error: unable to load driver class!");
+                System.exit(1);
+            }catch(SQLException se){
+                se.printStackTrace();
+            }catch(Exception e){
+                e.printStackTrace();
+            }finally{
+                try{
+                    if(stmt!=null)
+                    stmt.close();
+                }catch(SQLException se2){}
+                try{
+                    if(conn!=null)
+                        conn.close();
+                }catch(SQLException se){
+                       se.printStackTrace();
+                }
+            }
         }
         processRequest(request, response);
         //response.sendRedirect("/ForumWebApp/TopicServlet");

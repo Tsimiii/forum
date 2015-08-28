@@ -3,8 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/munka/git/forum/ForumWebApp/src/java/netForum/TopicServlet.java</file>
+            <file>file:/E:/munka/git/forum/ForumWebApp/web/index.jsp</file>
             <file>file:/E:/munka/git/forum/ForumWebApp/src/java/netForum/ForumServlet.java</file>
+            <file>file:/E:/munka/git/forum/ForumWebApp/web/WEB-INF/jsp/TopicJSP.jsp</file>
             <file>file:/E:/munka/git/forum/ForumWebApp/src/java/netForum/CreateTopic.java</file>
+            <file>file:/E:/munka/git/forum/ForumWebApp/web/WEB-INF/jsp/CreateTopicJSP.jsp</file>
+            <file>file:/E:/munka/git/forum/ForumWebApp/src/java/forummain/Forum.java</file>
+            <file>file:/E:/munka/git/forum/ForumWebApp/src/java/forummain/Post.java</file>
+            <file>file:/E:/munka/git/forum/ForumWebApp/web/WEB-INF/jsp/ForumJSP.jsp</file>
+            <file>file:/E:/munka/git/forum/ForumWebApp/src/java/forummain/Topic.java</file>
         </group>
     </open-files>
 </project-private>
